@@ -1,6 +1,6 @@
 'use client'
 
-import { Factory, Gauge, Layers, Euro } from 'lucide-react'
+import { Factory, Gauge, Layers, Euro, Truck } from 'lucide-react'
 import type { Industry, Material } from './simulator'
 
 const INDUSTRIES: { value: Industry; label: string }[] = [
@@ -8,6 +8,13 @@ const INDUSTRIES: { value: Industry; label: string }[] = [
   { value: 'renewable', label: 'Renewable Energy (Wind Turbine Bolts)' },
   { value: 'infrastructure', label: 'Infrastructure (High-Speed Rail)' },
   { value: 'machinery', label: 'General Machinery' },
+]
+
+const TIMELINES: string[] = [
+  'Q1/Q2 Rolling',
+  'Just-In-Time Continuous',
+  'Spot Delivery',
+  'Long-Term Custom Allocation',
 ]
 
 const MIN_TONNAGE = 100
@@ -22,6 +29,8 @@ type Props = {
   setMaterial: (v: Material) => void
   legacyPrice: number
   setLegacyPrice: (v: number) => void
+  timeline: string
+  setTimeline: (v: string) => void
 }
 
 function FieldLabel({
@@ -48,6 +57,8 @@ export function InputsPanel({
   setMaterial,
   legacyPrice,
   setLegacyPrice,
+  timeline,
+  setTimeline,
 }: Props) {
   const clampTonnage = (v: number) =>
     Math.min(MAX_TONNAGE, Math.max(MIN_TONNAGE, Number.isNaN(v) ? MIN_TONNAGE : v))
@@ -168,6 +179,22 @@ export function InputsPanel({
         <p className="mt-1.5 text-[11px] text-muted-foreground/70">
           Establishes the value delta versus conventional blast-furnace supply.
         </p>
+      </div>
+
+      {/* Delivery timeline */}
+      <div>
+        <FieldLabel icon={Truck}>Required Delivery Timeline</FieldLabel>
+        <select
+          value={timeline}
+          onChange={(e) => setTimeline(e.target.value)}
+          className="w-full rounded-lg border border-border bg-input px-3 py-2 text-sm text-foreground outline-none focus:border-primary focus:ring-2 focus:ring-primary/30"
+        >
+          {TIMELINES.map((t) => (
+            <option key={t} value={t} className="bg-card">
+              {t}
+            </option>
+          ))}
+        </select>
       </div>
     </div>
   )

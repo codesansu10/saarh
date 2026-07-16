@@ -1,6 +1,14 @@
 'use client'
 
-import { Leaf, ShieldAlert, Scale, TrendingUp, Trophy } from 'lucide-react'
+import {
+  Leaf,
+  ShieldAlert,
+  Scale,
+  TrendingUp,
+  Trophy,
+  Factory,
+  CheckCircle2,
+} from 'lucide-react'
 import type { Industry } from './simulator'
 
 type Props = {
@@ -8,6 +16,7 @@ type Props = {
   co2Saved: number
   penaltiesAvoided: number
   industry: Industry
+  timeline: string
 }
 
 const fmtInt = (n: number) =>
@@ -20,7 +29,13 @@ const fmtEuro = (n: number) =>
     maximumFractionDigits: 0,
   }).format(Math.round(n))
 
-export function ValueCards({ tonnage, co2Saved, penaltiesAvoided, industry }: Props) {
+export function ValueCards({
+  tonnage,
+  co2Saved,
+  penaltiesAvoided,
+  industry,
+  timeline,
+}: Props) {
   return (
     <div className="grid gap-5 lg:grid-cols-2 xl:grid-cols-3">
       {/* CARD 1 — Scope 3 Carbon Impact */}
@@ -92,6 +107,61 @@ export function ValueCards({ tonnage, co2Saved, penaltiesAvoided, industry }: Pr
           </span>
         </div>
         <CommercialLeverage industry={industry} />
+      </article>
+
+      {/* CARD 4 — Logistics & Supply Security */}
+      <article className="group flex flex-col rounded-2xl border border-border bg-card p-6 transition-colors hover:border-primary/50 lg:col-span-2 xl:col-span-3">
+        <div className="mb-4 flex items-center justify-between">
+          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            Logistics &amp; Supply Security
+          </span>
+          <span className="flex size-9 items-center justify-center rounded-lg bg-primary/15 text-primary">
+            <Factory className="size-5" aria-hidden="true" />
+          </span>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-3">
+          <div className="rounded-lg border border-primary/30 bg-primary/10 p-4">
+            <div className="flex items-center gap-2 text-primary">
+              <CheckCircle2 className="size-4" aria-hidden="true" />
+              <span className="text-xs font-semibold uppercase tracking-wider">
+                Capacity Secured
+              </span>
+            </div>
+            <p className="mt-2 font-space-grotesk text-2xl font-bold text-foreground">
+              100%
+            </p>
+            <p className="mt-1 text-[11px] leading-relaxed text-muted-foreground">
+              Guaranteed allocation for {fmtInt(tonnage)} t via the €3.5B
+              Power4Steel programme.
+            </p>
+          </div>
+          <div className="rounded-lg border border-border bg-secondary/40 p-4">
+            <p className="text-xs font-medium text-muted-foreground">
+              Active Supply Line
+            </p>
+            <p className="mt-2 font-space-grotesk text-base font-bold text-foreground">
+              Völklingen / Neunkirchen
+            </p>
+            <div className="mt-2 flex items-center gap-1.5 text-[11px] text-primary">
+              <span className="relative flex size-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-70" />
+                <span className="relative inline-flex size-2 rounded-full bg-primary" />
+              </span>
+              EAF route active
+            </div>
+          </div>
+          <div className="rounded-lg border border-border bg-secondary/40 p-4">
+            <p className="text-xs font-medium text-muted-foreground">
+              Delivery Schedule
+            </p>
+            <p className="mt-2 font-space-grotesk text-base font-bold text-foreground">
+              {timeline}
+            </p>
+            <p className="mt-1 text-[11px] leading-relaxed text-muted-foreground">
+              Lead-time locked against confirmed rolling-mill slots.
+            </p>
+          </div>
+        </div>
       </article>
     </div>
   )

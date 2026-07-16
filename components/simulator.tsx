@@ -1,11 +1,13 @@
 'use client'
 
 import { useMemo, useState } from 'react'
-import { BarChart3, FileCheck, Activity } from 'lucide-react'
+import { BarChart3, FileCheck, Activity, FileDown } from 'lucide-react'
 import { SaarstahlLogo } from './saarstahl-logo'
 import { InputsPanel } from './inputs-panel'
 import { ValueCards } from './value-cards'
 import { DppModal } from './dpp-modal'
+import { ReportModal } from './report-modal'
+import { QuoteForm } from './quote-form'
 
 export type Industry = 'automotive' | 'renewable' | 'infrastructure' | 'machinery'
 export type Material = 'wire-rod' | 'bar-steel'
@@ -18,7 +20,9 @@ export function Simulator() {
   const [industry, setIndustry] = useState<Industry>('automotive')
   const [material, setMaterial] = useState<Material>('wire-rod')
   const [legacyPrice, setLegacyPrice] = useState(720)
+  const [timeline, setTimeline] = useState('Q1/Q2 Rolling')
   const [modalOpen, setModalOpen] = useState(false)
+  const [reportOpen, setReportOpen] = useState(false)
 
   const { co2Saved, penaltiesAvoided } = useMemo(() => {
     const co2 = tonnage * CO2_FACTOR
@@ -42,6 +46,8 @@ export function Simulator() {
             setMaterial={setMaterial}
             legacyPrice={legacyPrice}
             setLegacyPrice={setLegacyPrice}
+            timeline={timeline}
+            setTimeline={setTimeline}
           />
         </div>
       </aside>
@@ -61,14 +67,24 @@ export function Simulator() {
               Live commercial &amp; sustainability modelling for Pure Steel+ deals.
             </p>
           </div>
-          <button
-            type="button"
-            onClick={() => setModalOpen(true)}
-            className="flex items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3 font-space-grotesk text-sm font-bold text-primary-foreground shadow-lg shadow-primary/20 transition-transform hover:-translate-y-0.5 hover:bg-primary/90"
-          >
-            <FileCheck className="size-4" aria-hidden="true" />
-            Generate DPP &amp; LESS Compliance Pack
-          </button>
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <button
+              type="button"
+              onClick={() => setReportOpen(true)}
+              className="flex items-center justify-center gap-2 rounded-xl border border-primary/40 bg-primary/10 px-5 py-3 font-space-grotesk text-sm font-bold text-primary transition-colors hover:bg-primary/20"
+            >
+              <FileDown className="size-4" aria-hidden="true" />
+              Download ESG Report (PDF)
+            </button>
+            <button
+              type="button"
+              onClick={() => setModalOpen(true)}
+              className="flex items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3 font-space-grotesk text-sm font-bold text-primary-foreground shadow-lg shadow-primary/20 transition-transform hover:-translate-y-0.5 hover:bg-primary/90"
+            >
+              <FileCheck className="size-4" aria-hidden="true" />
+              Open DiGreeS Digital Passport
+            </button>
+          </div>
         </header>
 
         <div className="px-6 py-8 md:px-10">
@@ -83,6 +99,7 @@ export function Simulator() {
             co2Saved={co2Saved}
             penaltiesAvoided={penaltiesAvoided}
             industry={industry}
+            timeline={timeline}
           />
 
           <div className="mt-8 rounded-2xl border border-border bg-card/60 p-6">
@@ -105,6 +122,8 @@ export function Simulator() {
               from six-figure CBAM exposure.
             </p>
           </div>
+
+          <QuoteForm />
         </div>
       </main>
 
@@ -113,6 +132,18 @@ export function Simulator() {
         onClose={() => setModalOpen(false)}
         material={material}
         tonnage={tonnage}
+      />
+
+      <ReportModal
+        open={reportOpen}
+        onClose={() => setReportOpen(false)}
+        tonnage={tonnage}
+        co2Saved={co2Saved}
+        penaltiesAvoided={penaltiesAvoided}
+        legacyPrice={legacyPrice}
+        industry={industry}
+        material={material}
+        timeline={timeline}
       />
     </div>
   )
