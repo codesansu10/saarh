@@ -1,41 +1,24 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
-import { Inter, Space_Grotesk } from 'next/font/google'
+import { Inter, Geist_Mono } from 'next/font/google'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
-const spaceGrotesk = Space_Grotesk({
+const geistMono = Geist_Mono({
   subsets: ['latin'],
-  variable: '--font-space-grotesk',
+  variable: '--font-mono-geist',
 })
 
 export const metadata: Metadata = {
-  title: 'Saarstahl DiGreeS Value Simulator | Pure Steel+',
+  title: 'Saarstahl Green-Steel Sales Simulator',
   description:
-    'Enterprise value simulator for Saarstahl Pure Steel+ low-emission steel — quantify CO2 savings, CBAM penalties avoided, and commercial leverage.',
+    'Stakeholder-specific green-steel sales-support pipeline: business value, objection-risk prediction, and sales preparation briefs for Saarstahl Pure Steel+. Academic prototype trained on synthetic data.',
   generator: 'v0.app',
-  icons: {
-    icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-    ],
-    apple: '/apple-icon.png',
-  },
 }
 
 export const viewport: Viewport = {
-  colorScheme: 'dark',
-  themeColor: '#0f172a',
+  colorScheme: 'light',
+  themeColor: '#f6f8f7',
 }
 
 export default function RootLayout({
@@ -46,7 +29,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`bg-background ${inter.variable} ${spaceGrotesk.variable}`}
+      className={`bg-background ${inter.variable} ${geistMono.variable}`}
     >
       <body className="font-sans antialiased">
         {children}

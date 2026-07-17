@@ -1,0 +1,49 @@
+{
+  "modelVersion": "rf-objection-v1",
+  "dataMode": "synthetic",
+  "trainedAt": "2026-07-17T14:54:46.856917+00:00",
+  "algorithm": "RandomForestClassifier (MultiOutput)",
+  "nEstimators": 300,
+  "maxDepth": 14,
+  "labels": [
+    "price_objection",
+    "proof_certification_objection",
+    "greenwashing_objection",
+    "supply_reliability_objection",
+    "internal_approval_objection",
+    "technical_quality_objection",
+    "low_urgency_objection"
+  ],
+  "categoricalFeatures": [
+    "stakeholder",
+    "industry",
+    "materialType",
+    "certificationStatus",
+    "supplyReliability",
+    "technicalQualificationStatus",
+    "deliveryTimeline"
+  ],
+  "numericFeatures": [
+    "annualSteelVolumeTonnes",
+    "conventionalSteelPricePerTonne",
+    "greenPremiumPerTonne",
+    "totalPremium",
+    "premiumPerProduct",
+    "premiumPercentage",
+    "baselineCo2Intensity",
+    "greenSteelCo2Intensity",
+    "co2Saved",
+    "proofScore",
+    "carbonPrice",
+    "indicativeCarbonValue",
+    "costSensitivity",
+    "proofSensitivity",
+    "claimRiskSensitivity",
+    "strategicFocus",
+    "supplySensitivity",
+    "technicalSensitivity",
+    "urgencySensitivity"
+  ],
+  "nTrainingRows": 12000,
+  "notice": "Trained on 100% synthetic data encoding plausible B2B green-steel sales dynamics. Not real customer data. Predictions are decision support only and must not be presented as validated customer behaviour."
+}

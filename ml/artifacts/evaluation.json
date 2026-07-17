@@ -1,0 +1,44 @@
+{
+  "perLabel": {
+    "price_objection": {
+      "rocAuc": 0.5577,
+      "f1": 0.2591,
+      "positiveRate": 0.284
+    },
+    "proof_certification_objection": {
+      "rocAuc": 0.7194,
+      "f1": 0.6905,
+      "positiveRate": 0.5687
+    },
+    "greenwashing_objection": {
+      "rocAuc": 0.7368,
+      "f1": 0.6655,
+      "positiveRate": 0.5077
+    },
+    "supply_reliability_objection": {
+      "rocAuc": 0.6768,
+      "f1": 0.5198,
+      "positiveRate": 0.368
+    },
+    "internal_approval_objection": {
+      "rocAuc": 0.6095,
+      "f1": 0.4281,
+      "positiveRate": 0.3497
+    },
+    "technical_quality_objection": {
+      "rocAuc": 0.6821,
+      "f1": 0.5314,
+      "positiveRate": 0.3647
+    },
+    "low_urgency_objection": {
+      "rocAuc": 0.5563,
+      "f1": 0.4159,
+      "positiveRate": 0.408
+    }
+  },
+  "macro": {
+    "rocAuc": 0.6484,
+    "f1": 0.5015,
+    "nTest": 3000
+  }
+}

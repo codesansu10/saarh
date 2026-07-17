@@ -13,3 +13,11 @@ __v0_jsx-dev-runtime.ts
 node_modules
 .next/
 .DS_Store
+
+# Python ML service
+ml/.venv/
+ml/__pycache__/
+**/__pycache__/
+*.pyc
+# Trained model binary is large and regenerable via `python train.py`
+ml/artifacts/model.pkl
