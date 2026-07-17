@@ -1,7 +1,8 @@
+// Objection prediction endpoint: tries the RF model service, else deterministic fallback.
 import { NextResponse } from 'next/server'
 import { buildFeatureRows } from '@/lib/feature-engineering'
 import { predictFromRows } from '@/lib/prediction-engine'
-import { validateDeal } from '@/lib/validation'
+import { validateDeal, isDealValid } from '@/lib/validation'
 import { calculateBusinessValue } from '@/lib/value-calculator'
 import { STAKEHOLDERS } from '@/lib/types'
 import type {
@@ -63,10 +64,9 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Missing deal' }, { status: 400 })
   }
 
-  const validation = validateDeal(body.deal)
-  if (!validation.valid) {
+  if (!isDealValid(body.deal)) {
     return NextResponse.json(
-      { error: 'Invalid deal', issues: validation.errors },
+      { error: 'Invalid deal', issues: validateDeal(body.deal) },
       { status: 422 },
     )
   }
