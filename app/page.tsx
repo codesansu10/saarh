@@ -175,11 +175,13 @@ export default function Page() {
         />
       )}
 
-      {step === 2 && output && (
+      {step === 2 && (
         <Step2Dashboard
           deal={deal}
           output={output}
-          onEditInputs={() => setStep(1)}
+          onChange={onChange}
+          errors={errors}
+          valid={valid}
           onNext={() => {
             setStep(3)
             if (valid && !prediction && !predLoading) void runPrediction()

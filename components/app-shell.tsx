@@ -6,8 +6,8 @@ import { BrandLogo } from './brand-logo'
 export type AppStep = 1 | 2 | 3 | 4
 
 const NAV_ITEMS: { step: AppStep; icon: React.ElementType; label: string }[] = [
-  { step: 1, icon: Calculator, label: 'Business Calculator' },
   { step: 2, icon: LayoutDashboard, label: 'Dashboard' },
+  { step: 1, icon: Calculator, label: 'Business Calculator' },
   { step: 3, icon: Users, label: 'Stakeholder Analysis' },
   { step: 4, icon: FileText, label: 'Sales Brief' },
 ]
@@ -29,7 +29,7 @@ export function AppShell({
 }) {
   const canAccess = (step: AppStep): boolean => {
     if (step === 1) return true
-    if (step === 2) return canStep2
+    if (step === 2) return true   // Dashboard always accessible; shows empty state if no output
     if (step === 3) return canStep3
     if (step === 4) return canStep4
     return false
@@ -49,21 +49,6 @@ export function AppShell({
 
         {/* Top nav */}
         <nav className="flex flex-col gap-0.5 px-2 pt-3" aria-label="Main navigation">
-          {/* Dashboard always visible but non-functional as its own page */}
-          <button
-            type="button"
-            onClick={() => onStepSelect(2)}
-            disabled={!canStep2}
-            className={`flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-sm font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-40 ${
-              activeStep === 2
-                ? 'bg-[var(--brand-green-soft)] text-[var(--brand-green-dark)]'
-                : 'text-muted-foreground hover:bg-[var(--surface-subtle)] hover:text-foreground'
-            }`}
-          >
-            <LayoutDashboard className="size-4 shrink-0" aria-hidden />
-            Dashboard
-          </button>
-
           {NAV_ITEMS.map(({ step, icon: Icon, label }) => {
             const isActive = activeStep === step
             const enabled = canAccess(step)
