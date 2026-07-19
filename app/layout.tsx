@@ -31,7 +31,7 @@ export default function RootLayout({
       lang="en"
       className={`bg-background ${inter.variable} ${geistMono.variable}`}
     >
-      <body className="font-sans antialiased">
+      <body className="font-sans antialiased overflow-hidden h-screen">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
