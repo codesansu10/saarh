@@ -6,8 +6,8 @@ import { BrandLogo } from './brand-logo'
 export type AppStep = 1 | 2 | 3 | 4
 
 const NAV_ITEMS: { step: AppStep; icon: React.ElementType; label: string }[] = [
-  { step: 2, icon: LayoutDashboard, label: 'Dashboard' },
   { step: 1, icon: Calculator, label: 'Business Calculator' },
+  { step: 2, icon: LayoutDashboard, label: 'Business Impact' },
   { step: 3, icon: Users, label: 'Stakeholder Analysis' },
   { step: 4, icon: FileText, label: 'Sales Brief' },
 ]

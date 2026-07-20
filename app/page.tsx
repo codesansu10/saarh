@@ -179,9 +179,7 @@ export default function Page() {
         <Step2Dashboard
           deal={deal}
           output={output}
-          onChange={onChange}
-          errors={errors}
-          valid={valid}
+          onEditInputs={() => setStep(1)}
           onNext={() => {
             setStep(3)
             if (valid && !prediction && !predLoading) void runPrediction()
